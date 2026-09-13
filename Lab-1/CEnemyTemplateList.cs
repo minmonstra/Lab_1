@@ -46,6 +46,20 @@ namespace Lab_1
             }
         }
 
+        public CEnemyTemplate GetEnemyByName(string name) 
+        {
+            CEnemyTemplate findenemy = null;
+            foreach (var enemy in enemies)
+            {
+                if (enemy.Name == name)
+                {
+                    findenemy = enemy;
+                    break;
+                }
+            }
+            return findenemy;
+        }
+
 
 
     }
