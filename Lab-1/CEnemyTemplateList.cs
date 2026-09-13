@@ -45,9 +45,10 @@ namespace Lab_1
             }
         }
 
-        public CEnemyTemplate GetEnemyByName(string name) 
+        public CEnemyTemplate GetEnemyByName(string name)
         {
             CEnemyTemplate findenemy = null;
+
             foreach (var enemy in enemies)
             {
                 if (enemy.Name == name)
@@ -56,10 +57,8 @@ namespace Lab_1
                     break;
                 }
             }
-            if (findenemy != null) {
-                return findenemy;
-            }
-              
+
+            return findenemy;
         }
 
         public CEnemyTemplate GetEnemyByIndex(int index)
