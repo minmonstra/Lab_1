@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+using System.Text.Json;
+using System.IO;
+using System.Text.Json.Serialization;
 
 namespace Lab_1
 {
@@ -58,7 +56,10 @@ namespace Lab_1
                     break;
                 }
             }
-            return findenemy;
+            if (findenemy != null) {
+                return findenemy;
+            }
+              
         }
 
         public CEnemyTemplate GetEnemyByIndex(int index)
@@ -82,9 +83,35 @@ namespace Lab_1
             return enemyNames;
         }
 
+        public void SaveToJson(string path)
+        {
+            string json = JsonSerializer.Serialize(enemies);
+            File.WriteAllText(path, json);
+        }
+
+        public void LoadFromJson(string path)
+        {
+            if (File.Exists(path))
+            {
+                string json = File.ReadAllText(path);
+                JsonDocument document = JsonDocument.Parse(json);
+                foreach (JsonElement enemyElement in document.RootElement.EnumerateArray())
+                {
+                    string name=enemyElement.GetProperty("Name").GetString();
+                    string iconName = enemyElement.GetProperty("IconName").GetString();
+                    int baseLife = enemyElement.GetProperty("BaseLife").GetInt32();
+                    double lifeModifier = enemyElement.GetProperty("LifeModifier").GetDouble();
+                    int baseGold = enemyElement.GetProperty("BaseGold").GetInt32();
+                    double goldModifier = enemyElement.GetProperty("GoldModifier").GetDouble();
+                    double spawnChance = enemyElement.GetProperty("SpawnChance").GetDouble();
+                    AddEnemy(name,iconName,baseLife,lifeModifier,baseGold,goldModifier,spawnChance);
+
+                }
+                 
+            }
 
 
-    }
+        }
     }
 }
     
