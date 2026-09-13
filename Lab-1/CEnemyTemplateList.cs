@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -70,10 +71,20 @@ namespace Lab_1
             {
                 return null;
             }
-
-
-
         }
+        public List<string> GetListOfEnemyNames()
+        {
+            List<string> enemyNames = new List<string>();
+            foreach (var enemy in enemies)
+            {
+                enemyNames.Add(enemy.Name);
+            }
+            return enemyNames;
+        }
+
+
+
+    }
     }
 }
     
