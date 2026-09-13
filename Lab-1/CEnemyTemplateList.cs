@@ -20,7 +20,28 @@ namespace Lab_1
             CEnemyTemplate enemy = new CEnemyTemplate(name, iconName, baseLife, lifeModifier, baseGold, goldModifier, spawnChance);
             enemies.Add(enemy);
         }
-        
+        public void DeleteEnemyByName(string name)
+        {
+
+            CEnemyTemplate delet_enemy_byname = null; // переменная типа CEnemyTemplate хранящий ссылку на обьект 
+            foreach (var enemy in enemies)
+            {
+                if (enemy.Name == name)
+                {
+                    delet_enemy_byname = enemy;
+                    break;
+                }
+
+            }
+            if (delet_enemy_byname != null)
+            {
+                enemies.Remove(delet_enemy_byname);
+            }
+        }
+         
+
+
+        }
     }
 }
     
