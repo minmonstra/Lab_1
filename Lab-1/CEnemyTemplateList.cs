@@ -60,9 +60,20 @@ namespace Lab_1
             return findenemy;
         }
 
+        public CEnemyTemplate GetEnemyByIndex(int index)
+        {
+            if (index < enemies.Count && index >= 0)
+            {
+                return enemies[index];
+            }
+            else
+            {
+                return null;
+            }
 
 
-    }
+
+        }
     }
 }
     
