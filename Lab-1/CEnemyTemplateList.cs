@@ -38,10 +38,17 @@ namespace Lab_1
                 enemies.Remove(delet_enemy_byname);
             }
         }
-         
-
-
+        public void DeleteEnemyByIndex(int index)
+        {
+            if (index < enemies.Count && index >= 0)
+            {
+                enemies.Remove(enemies[index]);
+            }
         }
+
+
+
+    }
     }
 }
     
