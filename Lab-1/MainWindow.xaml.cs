@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -44,6 +45,22 @@ namespace Lab_1
                 );
             }
         }
+        public void DisplayIcons()
+        {
+            foreach (EnemyIcon icon in enemyIcons)
+            {
+                Image image = new Image()
+                {
+                    Source = new BitmapImage(
+                        new Uri(icon.ImagePath)
+                    ),
+                    Height = 64
+                };
+
+                IconsListBox.Items.Add(image);
+            }
+        }
+
         //выбор папки с изображениями
         public void SelectFolderButton_Click(object sender, RoutedEventArgs e)
         {
@@ -52,7 +69,10 @@ namespace Lab_1
             if (dialog.ShowDialog() == true)
             {
                 LoadIconsFromFolder(dialog.FolderName);
+                DisplayIcons();
             }
         }
+         
+
     }
 }
