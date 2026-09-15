@@ -5,14 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab_1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="750" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Редактор противников" FontSize="30" FontWeight="Bold" Margin="30,10,10,10" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
         <Button Content="Выбрать папку"
-        Click="SelectFolderButton_Click"  Height="40" Width="80" Margin="37,35,683,359"/>
+        Click="SelectFolderButton_Click"  Height="auto" Width="auto"   Grid.Row="7" Margin="30,10,10,10"/>
         <ListBox
-Width="400"
-Margin="10 20"
+Width="auto"
+Height="auto"
+Margin="30,10,10,10"
 x:Name="IconsListBox"
-SelectionChanged="IconsListBox_SelectionChanged"/>
+SelectionChanged="IconsListBox_SelectionChanged" Grid.Column="0" Grid.RowSpan="6" Grid.Row="1"/>
     </Grid>
 </Window>

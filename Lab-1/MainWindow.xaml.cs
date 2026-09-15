@@ -58,7 +58,8 @@ namespace Lab_1
                     Source = new BitmapImage(
                         new Uri(icon.ImagePath)
                     ),
-                    Height = 64
+                    Height = 450,
+                    Width = 450
                 };
 
                 IconsListBox.Items.Add(image);
