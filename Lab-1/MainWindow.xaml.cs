@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,9 +17,31 @@ namespace Lab_1
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<EnemyIcon> enemyIcons;
+ 
+
         public MainWindow()
         {
             InitializeComponent();
+            enemyIcons = new List<EnemyIcon>();
+        }
+        public void LoadIconsFromFolder(string path)
+        {
+            //фильтр расширения изображения
+            string filter = "*.png";
+            //получение массива строк содержащих пути до изображений
+            string[] files = Directory.GetFiles(path, filter);
+            //перебор всех полученных путей
+            //в file содержится путь до изображения с расширением .png
+            foreach (string file in files)
+            {
+                enemyIcons.Add(
+                new EnemyIcon(
+                    System.IO.Path.GetFileName(file),
+                    file
+                )
+                );
+            }
         }
     }
 }
