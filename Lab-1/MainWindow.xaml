@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab_1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="750" Width="800">
+        Title="MainWindow" Height="750" Width="850">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*"/>
@@ -15,7 +15,7 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -31,5 +31,21 @@ Height="auto"
 Margin="30,10,10,10"
 x:Name="IconsListBox"
 SelectionChanged="IconsListBox_SelectionChanged" Grid.Column="0" Grid.RowSpan="6" Grid.Row="1"/>
+        <TextBlock Text="Имя" FontSize="16" FontWeight="Bold" Margin="10,10,30,10" Grid.Row="1" Grid.Column="1"/>
+        <TextBox x:Name="Name_enemy" Margin="10,40,30,10" Grid.Row="1" Grid.Column="1"/>
+        <TextBlock Text="Здоровье" FontSize="16" FontWeight="Bold" Margin="10,10,30,10" Grid.Row="2" Grid.Column="1"/>
+        <TextBox x:Name="Health_enemy" Margin="10,40,30,10" Grid.Row="2" Grid.Column="1"/>
+        <TextBlock Text="Модификатор здоровья" FontSize="16" FontWeight="Bold" Margin="10,10,30,10" Grid.Row="3" Grid.Column="1"/>
+        <TextBox x:Name="Health_mod_enemy" Margin="10,40,30,10" Grid.Row="3" Grid.Column="1"/>
+        <TextBlock Text="Золото" FontSize="16" FontWeight="Bold" Margin="10,10,30,10" Grid.Row="4" Grid.Column="1"/>
+        <TextBox x:Name="Gold_enemy" Margin="10,40,30,10" Grid.Row="4" Grid.Column="1"/>
+        <TextBlock Text="Модификатор золота" FontSize="16" FontWeight="Bold" Margin="10,10,30,10" Grid.Row="5" Grid.Column="1"/>
+        <TextBox x:Name="Gold_mod_enemy" Margin="10,40,30,10" Grid.Row="5" Grid.Column="1"/>
+        <TextBlock Text="Спавн" FontSize="16" FontWeight="Bold" Margin="10,10,30,10" Grid.Row="6" Grid.Column="1"/>
+        <TextBox x:Name="Spawn_enemy" Margin="10,40,30,10" Grid.Row="6" Grid.Column="1"/>
+        <Button x:Name="Edit" Content="Редактировать" Click="Edit_Click"  Grid.Row="7" Grid.Column="1" Margin="10,5,30,51"/>
+        <Button x:Name="Add" Content="Добавить" Click="Add_Click"  Grid.Row="7" Grid.Column="1" Margin="10,28,30,28"/>
+        <Button x:Name="Delete" Content="Удалить" Click="Delete_Click"  Grid.Row="7" Grid.Column="1" Margin="10,51,30,5"/>
+
     </Grid>
 </Window>
