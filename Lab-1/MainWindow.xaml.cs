@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace Lab_1
 {
@@ -41,6 +42,16 @@ namespace Lab_1
                     file
                 )
                 );
+            }
+        }
+        //выбор папки с изображениями
+        public void SelectFolderButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFolderDialog dialog = new OpenFolderDialog();
+
+            if (dialog.ShowDialog() == true)
+            {
+                LoadIconsFromFolder(dialog.FolderName);
             }
         }
     }

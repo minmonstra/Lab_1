@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Button Content="Выбрать папку"
+        Click="SelectFolderButton_Click"  Height="40" Width="80" Margin="37,35,683,359"/>
         <ListBox
 Width="400"
 Margin="10 20"
