@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using Microsoft.Win32;
+using System;
+using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Windows;
@@ -10,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Microsoft.Win32;
 
 namespace Lab_1
 {
@@ -20,12 +21,15 @@ namespace Lab_1
     public partial class MainWindow : Window
     {
         List<EnemyIcon> enemyIcons;
- 
+        CEnemyTemplate currentEnemy;
+        CEnemyTemplateList enemyList;
 
         public MainWindow()
         {
             InitializeComponent();
+
             enemyIcons = new List<EnemyIcon>();
+            enemyList = new CEnemyTemplateList();
         }
         public void LoadIconsFromFolder(string path)
         {
@@ -72,7 +76,25 @@ namespace Lab_1
                 DisplayIcons();
             }
         }
-         
+        // обработчик события изменения выбора в ListBox
+        private void IconsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // приведение sender к типу ListBox
+            ListBox iconHolder = sender as ListBox;
+            // проверка что выбранный элемент является изображением
+            // и что элемент не равен null
+            if (iconHolder.SelectedItem is Image selectedImage && iconHolder.SelectedItem != null)
+            {
+                // получение имени файла из источника изображения
+                // так как Source это Uri, то для получения имени файла
+                // нужно преобразовать его в строку и использовать Path.GetFileName.
+                // ListBox хранит в себе объекты типа Image
+                // selectedImage.Source.ToString() возвращает полный путь до изображения
+                string iconName = System.IO.Path.GetFileName(selectedImage.Source.ToString());
+                // присвоение имени иконки в шаблон врага
+                currentEnemy.SetIconName(iconName);
+            }
+        }
 
     }
 }

@@ -38,5 +38,9 @@ namespace Lab_1
             GoldModifier = goldModifier;
             SpawnChance = spawnChance;
         }
+        public void SetIconName(string iconName)
+        {
+            IconName = iconName;
+        }
     }
 }
