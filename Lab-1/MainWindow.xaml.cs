@@ -23,6 +23,7 @@ namespace Lab_1
         List<EnemyIcon> enemyIcons;
         CEnemyTemplate currentEnemy;
         CEnemyTemplateList enemyList;
+        string selectedIconName;
 
         public MainWindow()
         {
@@ -30,9 +31,11 @@ namespace Lab_1
 
             enemyIcons = new List<EnemyIcon>();
             enemyList = new CEnemyTemplateList();
+            currentEnemy = null;
         }
         public void LoadIconsFromFolder(string path)
         {
+            enemyIcons.Clear();
             //фильтр расширения изображения
             string filter = "*.png";
             //получение массива строк содержащих пути до изображений
@@ -97,5 +100,23 @@ namespace Lab_1
             }
         }
 
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            string name = Name_enemy.Text;
+            string iconName = selectedIconName;
+
+            if (!int.TryParse(Health_enemy.Text, out int baseLife) || !double.TryParse(Health_mod_enemy.Text, out double lifeModifier) || !int.TryParse(Gold_enemy.Text, out int baseGold) ||
+            !double.TryParse(Gold_mod_enemy.Text, out double goldModifier) || !double.TryParse(Spawn_enemy.Text, out double spawnChance))
+            {
+                MessageBox.Show("Некорректные данные. Проверьте введённые значения.");
+                return;
+            }
+            enemyList.AddEnemy(name,iconName,baseLife,lifeModifier,baseGold,goldModifier,spawnChance);
+
+            currentEnemy = enemyList.GetEnemyByName(name);
+
+            MessageBox.Show($"Противник \"{name}\" добавлен.");
+        }
+
+         
     }
-}
