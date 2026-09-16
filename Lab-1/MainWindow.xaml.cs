@@ -118,5 +118,29 @@ namespace Lab_1
             MessageBox.Show($"Противник \"{name}\" добавлен.");
         }
 
-         
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentEnemy == null)
+            {
+                MessageBox.Show("Сначала добавьте или выберите противника для редактирования.");
+                return;
+            }
+
+            if (!int.TryParse(Health_enemy.Text, out int baseLife) || !double.TryParse(Health_mod_enemy.Text, out double lifeModifier) || !int.TryParse(Gold_enemy.Text, out int baseGold) ||
+            !double.TryParse(Gold_mod_enemy.Text, out double goldModifier) || !double.TryParse(Spawn_enemy.Text, out double spawnChance))
+            {
+                MessageBox.Show("Некорректные данные. Проверьте введённые значения.");
+                return;
+            }
+
+            string name = Name_enemy.Text;
+            string iconName = selectedIconName;
+
+            // удаляем и добавляем новую(так как свойства приватные)
+            enemyList.DeleteEnemyByName(currentEnemy.Name);
+            enemyList.AddEnemy(name, iconName, baseLife, lifeModifier, baseGold, goldModifier, spawnChance);
+            currentEnemy = enemyList.GetEnemyByName(name);
+
+            MessageBox.Show($"Противник \"{name}\" отредактирован.");
+        }
     }
