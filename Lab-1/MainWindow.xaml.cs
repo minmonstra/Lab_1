@@ -178,17 +178,45 @@ namespace Lab_1
         // загрузка списка противников из JSON-файла
         private void Load_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog
-            {
-                Filter = "JSON файлы (*.json)|*.json"
-            };
+            OpenFileDialog dialog = new OpenFileDialog();
+
+            dialog.Filter = "JSON файлы (*.json)|*.json";
 
             if (dialog.ShowDialog() == true)
             {
                 enemyList.LoadFromJson(dialog.FileName);
-                MessageBox.Show("Противник загружен");
-            }
-        }
 
+                EnemiesListBox.Items.Clear();
+
+                foreach (string name in enemyList.GetListOfEnemyNames())
+                {
+                    EnemiesListBox.Items.Add(name);
+                }
+
+                MessageBox.Show("Противники загружены.");
+            }
+
+        }
+        private void EnemiesListBox_SelectionChanged(object sender,SelectionChangedEventArgs e)
+        {
+            if (EnemiesListBox.SelectedItem == null)
+                return;
+
+            string name = EnemiesListBox.SelectedItem.ToString();
+
+            currentEnemy = enemyList.GetEnemyByName(name);
+
+            if (currentEnemy == null)
+                return;
+
+            Name_enemy.Text = currentEnemy.Name;
+            Health_enemy.Text = currentEnemy.BaseLife.ToString();
+            Health_mod_enemy.Text = currentEnemy.LifeModifier.ToString();
+            Gold_enemy.Text = currentEnemy.BaseGold.ToString();
+            Gold_mod_enemy.Text = currentEnemy.GoldModifier.ToString();
+            Spawn_enemy.Text = currentEnemy.SpawnChance.ToString();
+
+            selectedIconName = currentEnemy.IconName;
+        }
     }
 }
