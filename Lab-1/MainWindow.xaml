@@ -47,5 +47,9 @@ SelectionChanged="IconsListBox_SelectionChanged" Grid.Column="0" Grid.RowSpan="6
         <Button x:Name="Add" Content="Добавить" Click="Add_Click"  Grid.Row="7" Grid.Column="1" Margin="10,28,30,28"/>
         <Button x:Name="Delete" Content="Удалить" Click="Delete_Click"  Grid.Row="7" Grid.Column="1" Margin="10,51,30,5"/>
 
+
+        <Button x:Name="Load" Content="Загрузить противника" Click="Load_Click"  Grid.Row="8" Grid.Column="0" Margin="0,34,454,31" HorizontalAlignment="Right" Width="154" />
+        <Button x:Name="Save" Content="Сохранить" Click="Save_Click"  Grid.Row="8" Grid.Column="0" Margin="241,34,268,31"/>
+
     </Grid>
 </Window>
