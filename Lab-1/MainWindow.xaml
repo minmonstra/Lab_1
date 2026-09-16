@@ -8,7 +8,7 @@
         Title="MainWindow" Height="750" Width="850">
 
     <Window.Background>
-        <ImageBrush ImageSource="Images/back1.png"/>
+        <ImageBrush ImageSource="/Images/back1.png"/>
     </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
@@ -43,7 +43,7 @@ Width="auto"
 Height="auto"
 Margin="81,2,61,40"
 x:Name="IconsListBox"
-SelectionChanged="IconsListBox_SelectionChanged" Grid.Column="0" Grid.RowSpan="5" Grid.Row="3" Background="Black"/>
+SelectionChanged="IconsListBox_SelectionChanged" Grid.Column="0" Grid.RowSpan="5" Grid.Row="3" Background="Black" BorderBrush="Transparent"/>
         <TextBlock Text="Имя" FontSize="30"   Margin="10,10,30,10" Grid.Row="1" Grid.Column="1" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
         <TextBox x:Name="Name_enemy" Margin="10,40,30,10" Grid.Row="1" Grid.Column="1" Background="Transparent" BorderBrush="Black"/>
         <TextBlock Text="Здоровье" FontSize="30"   Margin="10,10,30,10" Grid.Row="2" Grid.Column="1" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
@@ -58,7 +58,7 @@ SelectionChanged="IconsListBox_SelectionChanged" Grid.Column="0" Grid.RowSpan="5
         <TextBox x:Name="Spawn_enemy" Margin="10,30,30,20" Grid.Row="6" Grid.Column="1" Background="Transparent" BorderBrush="Black"/>
         <Button x:Name="Edit" Content="Редактировать" Click="Edit_Click"  Grid.Row="7" Grid.Column="1" Margin="10,5,30,51" Background="#9B5E5F" FontSize="20" BorderBrush="Black" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
         <Button x:Name="Add" Content="Добавить" Click="Add_Click"  Grid.Row="7" Grid.Column="1" Margin="10,28,30,28" Background="#9B5E5F" FontSize="20" BorderBrush="Black" FontFamily="pack://application:,,,/Font/#bigdonstarve" />
-        <Button x:Name="Delete" Content="Удалить" Click="Delete_Click"  Grid.Row="7" Grid.Column="1" Margin="10,51,30,5" Background="#9B5E5F"  FontSize="20" BorderBrush="Black"  FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
+        <Button x:Name="Delete" Content="Удалить" Click="Delete_Click"  Grid.Row="7" Grid.Column="1" Margin="10,51,30,4" Background="#9B5E5F"  FontSize="20" BorderBrush="Black"  FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
 
 
         <Button x:Name="Load" Content="Загрузить противника" Click="Load_Click"  Grid.Row="8" Grid.Column="0" Margin="0,34,483,31" HorizontalAlignment="Right" Width="154" Background="#9B5E5F" FontSize="23" BorderBrush="Black"  FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
