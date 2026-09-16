@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -21,9 +22,8 @@ namespace Lab_1
     public partial class MainWindow : Window
     {
         List<EnemyIcon> enemyIcons;
-        CEnemyTemplate currentEnemy;
+        CEnemyTemplate? currentEnemy;
         CEnemyTemplateList enemyList;
-        string selectedIconName;
 
         public MainWindow()
         {
@@ -31,17 +31,22 @@ namespace Lab_1
 
             enemyIcons = new List<EnemyIcon>();
             enemyList = new CEnemyTemplateList();
-            currentEnemy = null;
         }
         public void LoadIconsFromFolder(string path)
         {
+            //очистка старого списка иконок, чтобы при повторном выборе папки они не дублировались
             enemyIcons.Clear();
-            //фильтр расширения изображения
-            string filter = "*.png";
-            //получение массива строк содержащих пути до изображений
-            string[] files = Directory.GetFiles(path, filter);
+
+            //фильтры расширений изображений — по заданию нужны ВСЕ изображения из папки
+            string[] filters = { "*.png", "*.jpg", "*.jpeg", "*.bmp", "*.gif" };
+            //получение путей до изображений по каждому из расширений
+            List<string> files = new List<string>();
+            foreach (string filter in filters)
+            {
+                files.AddRange(Directory.GetFiles(path, filter));
+            }
             //перебор всех полученных путей
-            //в file содержится путь до изображения с расширением .png
+            //в file содержится полный путь до изображения
             foreach (string file in files)
             {
                 enemyIcons.Add(
@@ -54,10 +59,14 @@ namespace Lab_1
         }
         public void DisplayIcons()
         {
+            //очистка отображаемого списка перед повторным заполнением
+            IconsListBox.Items.Clear();
+
             foreach (EnemyIcon icon in enemyIcons)
             {
                 Image image = new Image()
                 {
+                    //форматирование иконок под единый размер
                     Source = new BitmapImage(
                         new Uri(icon.ImagePath)
                     ),
@@ -86,8 +95,7 @@ namespace Lab_1
             // приведение sender к типу ListBox
             ListBox iconHolder = sender as ListBox;
             // проверка что выбранный элемент является изображением
-            // и что элемент не равен null
-            if (iconHolder.SelectedItem is Image selectedImage && iconHolder.SelectedItem != null)
+            if (iconHolder != null && iconHolder.SelectedItem is Image selectedImage)
             {
                 // получение имени файла из источника изображения
                 // так как Source это Uri, то для получения имени файла
@@ -95,29 +103,29 @@ namespace Lab_1
                 // ListBox хранит в себе объекты типа Image
                 // selectedImage.Source.ToString() возвращает полный путь до изображения
                 string iconName = System.IO.Path.GetFileName(selectedImage.Source.ToString());
-                // присвоение имени иконки в шаблон врага
-                currentEnemy.SetIconName(iconName);
+                // присвоение имени иконки в шаблон врага (только если противник уже выбран/добавлен)
+                currentEnemy?.SetIconName(iconName);
             }
         }
 
+        // добавление нового противника в список на основании данных из полей ввода
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            string name = Name_enemy.Text;
-            string iconName = selectedIconName;
-
-            if (!int.TryParse(Health_enemy.Text, out int baseLife) || !double.TryParse(Health_mod_enemy.Text, out double lifeModifier) || !int.TryParse(Gold_enemy.Text, out int baseGold) ||
-            !double.TryParse(Gold_mod_enemy.Text, out double goldModifier) || !double.TryParse(Spawn_enemy.Text, out double spawnChance))
+            if (!TryReadEnemyFields(out string name, out int baseLife, out double lifeModifier,
+                out int baseGold, out double goldModifier, out double spawnChance))
             {
-                MessageBox.Show("Некорректные данные. Проверьте введённые значения.");
                 return;
             }
-            enemyList.AddEnemy(name, iconName, baseLife, lifeModifier, baseGold, goldModifier, spawnChance);
 
+            string iconName = currentEnemy?.IconName ?? string.Empty;
+
+            enemyList.AddEnemy(name, iconName, baseLife, lifeModifier, baseGold, goldModifier, spawnChance);
             currentEnemy = enemyList.GetEnemyByName(name);
 
             MessageBox.Show($"Противник \"{name}\" добавлен.");
         }
 
+        // редактирование выбранного противника значениями из полей ввода
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
             if (currentEnemy == null)
@@ -126,23 +134,24 @@ namespace Lab_1
                 return;
             }
 
-            if (!int.TryParse(Health_enemy.Text, out int baseLife) || !double.TryParse(Health_mod_enemy.Text, out double lifeModifier) || !int.TryParse(Gold_enemy.Text, out int baseGold) ||
-            !double.TryParse(Gold_mod_enemy.Text, out double goldModifier) || !double.TryParse(Spawn_enemy.Text, out double spawnChance))
+            if (!TryReadEnemyFields(out string name, out int baseLife, out double lifeModifier,
+                out int baseGold, out double goldModifier, out double spawnChance))
             {
-                MessageBox.Show("Некорректные данные. Проверьте введённые значения.");
                 return;
             }
 
-            string name = Name_enemy.Text;
-            string iconName = selectedIconName;
+            string oldName = currentEnemy.Name;
+            string iconName = currentEnemy.IconName;
 
-            // удаляем и добавляем новую(так как свойства приватные)
-            enemyList.DeleteEnemyByName(currentEnemy.Name);
+            // т.к. свойства CEnemyTemplate доступны только для чтения,
+            // редактирование реализовано через удаление старой записи и добавление обновлённой
+            enemyList.DeleteEnemyByName(oldName);
             enemyList.AddEnemy(name, iconName, baseLife, lifeModifier, baseGold, goldModifier, spawnChance);
             currentEnemy = enemyList.GetEnemyByName(name);
 
             MessageBox.Show($"Противник \"{name}\" отредактирован.");
         }
+
         // удаление текущего выбранного противника из списка
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
@@ -170,7 +179,7 @@ namespace Lab_1
             if (dialog.ShowDialog() == true)
             {
                 enemyList.SaveToJson(dialog.FileName);
-                MessageBox.Show("Противник сохранен");
+                MessageBox.Show("Список противников сохранён.");
             }
         }
 
@@ -188,5 +197,36 @@ namespace Lab_1
                 MessageBox.Show("Список противников загружен.");
             }
         }
+
+        // вспомогательный метод: чтение и валидация числовых полей ввода
+        private bool TryReadEnemyFields(out string name, out int baseLife, out double lifeModifier,
+            out int baseGold, out double goldModifier, out double spawnChance)
+        {
+            name = Name_enemy.Text;
+            baseLife = 0;
+            lifeModifier = 0;
+            baseGold = 0;
+            goldModifier = 0;
+            spawnChance = 0;
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                MessageBox.Show("Введите имя противника.");
+                return false;
+            }
+
+            if (!int.TryParse(Health_enemy.Text, out baseLife) ||
+                !double.TryParse(Health_mod_enemy.Text, out lifeModifier) ||
+                !int.TryParse(Gold_enemy.Text, out baseGold) ||
+                !double.TryParse(Gold_mod_enemy.Text, out goldModifier) ||
+                !double.TryParse(Spawn_enemy.Text, out spawnChance))
+            {
+                MessageBox.Show("Проверьте правильность заполнения числовых полей.");
+                return false;
+            }
+
+            return true;
+        }
+
     }
 }

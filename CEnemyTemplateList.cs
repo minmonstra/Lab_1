@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.Json;
 using System.IO;
-using System.Text.Json.Serialization;
 
 namespace Lab_1
 {
@@ -12,9 +10,10 @@ namespace Lab_1
         List<CEnemyTemplate> enemies;
         public CEnemyTemplateList()
         {
-            enemies = new List<CEnemyTemplate>(); }
-        
-            public void AddEnemy(string name, string iconName, int baseLife, double lifeModifier, int baseGold, double goldModifier, double spawnChance)
+            enemies = new List<CEnemyTemplate>();
+        }
+
+        public void AddEnemy(string name, string iconName, int baseLife, double lifeModifier, int baseGold, double goldModifier, double spawnChance)
         {
             CEnemyTemplate enemy = new CEnemyTemplate(name, iconName, baseLife, lifeModifier, baseGold, goldModifier, spawnChance);
             enemies.Add(enemy);
@@ -113,5 +112,3 @@ namespace Lab_1
         }
     }
 }
-    
-
