@@ -96,7 +96,8 @@ namespace Lab_1
                 // selectedImage.Source.ToString() возвращает полный путь до изображения
                 string iconName = System.IO.Path.GetFileName(selectedImage.Source.ToString());
                 // присвоение имени иконки в шаблон врага
-                currentEnemy.SetIconName(iconName);
+                selectedIconName = iconName;
+
             }
         }
 
@@ -170,7 +171,7 @@ namespace Lab_1
             if (dialog.ShowDialog() == true)
             {
                 enemyList.SaveToJson(dialog.FileName);
-                MessageBox.Show("Противник сохранен");
+                MessageBox.Show("Противники сохранены");
             }
         }
 
