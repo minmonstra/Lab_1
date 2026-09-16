@@ -188,5 +188,10 @@ namespace Lab_1
                 MessageBox.Show("Список противников загружен.");
             }
         }
+
+        private void Gold_enemy_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
