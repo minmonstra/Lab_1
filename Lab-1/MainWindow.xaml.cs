@@ -61,8 +61,8 @@ namespace Lab_1
                     Source = new BitmapImage(
                         new Uri(icon.ImagePath)
                     ),
-                    Height = 450,
-                    Width = 450
+                    Height = 350,
+                    Width = 500
                 };
 
                 IconsListBox.Items.Add(image);
@@ -185,13 +185,9 @@ namespace Lab_1
             if (dialog.ShowDialog() == true)
             {
                 enemyList.LoadFromJson(dialog.FileName);
-                MessageBox.Show("Список противников загружен.");
+                MessageBox.Show("Противник загружен");
             }
         }
 
-        private void Gold_enemy_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 }

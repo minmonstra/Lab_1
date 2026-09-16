@@ -28,7 +28,7 @@
         </Grid.ColumnDefinitions>
         <TextBlock Text="Редактор противников" FontSize="50" FontWeight="Bold" Margin="187,10,0,77" Grid.Row="0" HorizontalAlignment="Left" Width="338" FontFamily="pack://application:,,,/Font/#bigdonstarve" Grid.RowSpan="2"/>
         <Button Content="Выбрать папку" FontFamily="pack://application:,,,/Font/#bigdonstarve"
-        Click="SelectFolderButton_Click"  Height="auto" Width="auto" Margin="271,10,260,28" Grid.Row="1"  Background="Transparent" BorderBrush="Black" FontSize="35">
+        Click="SelectFolderButton_Click"  Height="auto" Width="auto" Margin="271,10,252,28" Grid.Row="1"  Background="Transparent" BorderBrush="Black" FontSize="35">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -45,17 +45,17 @@ Margin="81,2,61,40"
 x:Name="IconsListBox"
 SelectionChanged="IconsListBox_SelectionChanged" Grid.Column="0" Grid.RowSpan="5" Grid.Row="3" Background="Black" BorderBrush="Transparent"/>
         <TextBlock Text="Имя" FontSize="30"   Margin="10,10,30,10" Grid.Row="1" Grid.Column="1" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
-        <TextBox x:Name="Name_enemy" Margin="10,40,30,10" Grid.Row="1" Grid.Column="1" Background="Transparent" BorderBrush="Black"/>
+        <TextBox x:Name="Name_enemy" Margin="10,40,30,10" Grid.Row="1" Grid.Column="1" Background="Transparent" BorderBrush="Black" FontSize="25" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
         <TextBlock Text="Здоровье" FontSize="30"   Margin="10,10,30,10" Grid.Row="2" Grid.Column="1" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
-        <TextBox x:Name="Health_enemy" Margin="10,40,30,10" Grid.Row="2" Grid.Column="1" Background="Transparent" BorderBrush="Black"/>
+        <TextBox x:Name="Health_enemy" Margin="10,40,30,10" Grid.Row="2" Grid.Column="1" Background="Transparent" BorderBrush="Black" FontSize="25" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
         <TextBlock Text="Модификатор хп" FontSize="28"   Margin="10,10,10,10" Grid.Row="3" Grid.Column="1" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
-        <TextBox x:Name="Health_mod_enemy" Margin="10,40,30,10" Grid.Row="3" Grid.Column="1" Background="Transparent" BorderBrush="Black"/>
+        <TextBox x:Name="Health_mod_enemy" Margin="10,40,30,10" Grid.Row="3" Grid.Column="1" Background="Transparent" BorderBrush="Black" FontSize="25" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
         <TextBlock Text="Золото" FontSize="30"   Margin="10,10,30,10" Grid.Row="4" Grid.Column="1" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
-        <TextBox x:Name="Gold_enemy" Margin="10,40,30,10" Grid.Row="4" Grid.Column="1" Background="Transparent" BorderBrush="Black" />
+        <TextBox x:Name="Gold_enemy" Margin="10,40,30,10" Grid.Row="4" Grid.Column="1" Background="Transparent" BorderBrush="Black" FontSize="25" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
         <TextBlock Text="Модификатор золота" FontSize="22"   Margin="10,10,12,10" Grid.Row="5" Grid.Column="1" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
-        <TextBox x:Name="Gold_mod_enemy" Margin="10,40,30,10" Grid.Row="5" Grid.Column="1" Background="Transparent" BorderBrush="Black"/>
+        <TextBox x:Name="Gold_mod_enemy" Margin="10,40,30,10" Grid.Row="5" Grid.Column="1" Background="Transparent" BorderBrush="Black" FontSize="25" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
         <TextBlock Text="Спавн" FontSize="25"   Margin="20,79,20,20" Grid.Row="5" Grid.Column="1" Grid.RowSpan="2" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
-        <TextBox x:Name="Spawn_enemy" Margin="10,30,30,20" Grid.Row="6" Grid.Column="1" Background="Transparent" BorderBrush="Black"/>
+        <TextBox x:Name="Spawn_enemy" Margin="10,30,30,20" Grid.Row="6" Grid.Column="1" Background="Transparent" BorderBrush="Black" FontSize="25" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
         <Button x:Name="Edit" Content="Редактировать" Click="Edit_Click"  Grid.Row="7" Grid.Column="1" Margin="10,5,30,51" Background="#9B5E5F" FontSize="20" BorderBrush="Black" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
         <Button x:Name="Add" Content="Добавить" Click="Add_Click"  Grid.Row="7" Grid.Column="1" Margin="10,28,30,28" Background="#9B5E5F" FontSize="20" BorderBrush="Black" FontFamily="pack://application:,,,/Font/#bigdonstarve" />
         <Button x:Name="Delete" Content="Удалить" Click="Delete_Click"  Grid.Row="7" Grid.Column="1" Margin="10,51,30,4" Background="#9B5E5F"  FontSize="20" BorderBrush="Black"  FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
