@@ -111,7 +111,7 @@ namespace Lab_1
                 MessageBox.Show("Некорректные данные. Проверьте введённые значения.");
                 return;
             }
-            enemyList.AddEnemy(name,iconName,baseLife,lifeModifier,baseGold,goldModifier,spawnChance);
+            enemyList.AddEnemy(name, iconName, baseLife, lifeModifier, baseGold, goldModifier, spawnChance);
 
             currentEnemy = enemyList.GetEnemyByName(name);
 
@@ -143,4 +143,50 @@ namespace Lab_1
 
             MessageBox.Show($"Противник \"{name}\" отредактирован.");
         }
+        // удаление текущего выбранного противника из списка
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentEnemy == null)
+            {
+                MessageBox.Show("Сначала добавьте или выберите противника для удаления.");
+                return;
+            }
+
+            enemyList.DeleteEnemyByName(currentEnemy.Name);
+            currentEnemy = null;
+
+            MessageBox.Show("Противник удалён.");
+        }
+
+        // сохранение списка противников в JSON-файл
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog
+            {
+                Filter = "JSON файлы (*.json)|*.json",
+                FileName = "enemies.json"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                enemyList.SaveToJson(dialog.FileName);
+                MessageBox.Show("Противник сохранен");
+            }
+        }
+
+        // загрузка списка противников из JSON-файла
+        private void Load_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog
+            {
+                Filter = "JSON файлы (*.json)|*.json"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                enemyList.LoadFromJson(dialog.FileName);
+                MessageBox.Show("Список противников загружен.");
+            }
+        }
     }
+}
