@@ -26,8 +26,8 @@
             <ColumnDefinition Width="346*"/>
             <ColumnDefinition Width="79*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="Редактор противников" FontSize="30" FontWeight="Bold" Margin="0,10,0,10" Grid.Row="0" HorizontalAlignment="Center" Width="338" />
-        <Button Content="Выбрать папку"
+        <TextBlock Text="Редактор противников" FontSize="30" FontWeight="Bold" Margin="0,10,0,10" Grid.Row="0" HorizontalAlignment="Center" Width="338" FontFamily="pack://application:,,,/Fonts/#bigdonstarve"/>
+        <Button Content="Выбрать папку" FontFamily="pack://application:,,,/Fonts/#bigdonstarve"
         Click="SelectFolderButton_Click"  Height="auto" Width="auto" Margin="271,0,260,43" Grid.Row="1" RenderTransformOrigin="0.5,0.5" Background="Transparent" BorderBrush="Black" FontSize="20">
             <Button.RenderTransform>
                 <TransformGroup>

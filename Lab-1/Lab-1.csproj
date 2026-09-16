@@ -10,11 +10,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Font\bigdonstarve.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="10.0.12" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Icons\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Font\bigdonstarve.ttf" />
   </ItemGroup>
 
 </Project>
