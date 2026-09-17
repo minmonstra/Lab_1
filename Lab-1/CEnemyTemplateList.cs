@@ -92,6 +92,7 @@ namespace Lab_1
         {
             if (File.Exists(path))
             {
+                enemies.Clear();
                 string json = File.ReadAllText(path);
                 JsonDocument document = JsonDocument.Parse(json);
                 foreach (JsonElement enemyElement in document.RootElement.EnumerateArray())
