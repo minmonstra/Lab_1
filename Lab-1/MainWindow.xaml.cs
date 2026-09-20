@@ -61,7 +61,7 @@ namespace Lab_1
                     Source = new BitmapImage(
                         new Uri(icon.ImagePath)
                     ),
-                    Height = 350,
+                    Height = 300,
                     Width = 500
                 };
 
@@ -115,6 +115,7 @@ namespace Lab_1
             enemyList.AddEnemy(name, iconName, baseLife, lifeModifier, baseGold, goldModifier, spawnChance);
 
             currentEnemy = enemyList.GetEnemyByName(name);
+            EnemiesListBox.Items.Add(name);
 
             MessageBox.Show($"Противник \"{name}\" добавлен.");
         }
@@ -137,10 +138,27 @@ namespace Lab_1
             string name = Name_enemy.Text;
             string iconName = selectedIconName;
 
+            // Сохраняем текущий выбранный индекс и старое имя, чтобы заменить запись в ListBox,
+            // а не просто добавить новую — это предотвращает дубликаты
+            int selectedIndex = EnemiesListBox.SelectedIndex;
+            string oldName = currentEnemy.Name;
+
             // удаляем и добавляем новую(так как свойства приватные)
-            enemyList.DeleteEnemyByName(currentEnemy.Name);
+            enemyList.DeleteEnemyByName(oldName);
             enemyList.AddEnemy(name, iconName, baseLife, lifeModifier, baseGold, goldModifier, spawnChance);
             currentEnemy = enemyList.GetEnemyByName(name);
+
+            if (selectedIndex >= 0 && selectedIndex < EnemiesListBox.Items.Count)
+            {
+                EnemiesListBox.Items[selectedIndex] = name;
+            }
+            else
+            {
+                // запасной вариант: если индекс недоступен — удалить старое и добавить новое (чтобы не дублировать)
+                if (EnemiesListBox.Items.Contains(oldName))
+                    EnemiesListBox.Items.Remove(oldName);
+                EnemiesListBox.Items.Add(name);
+            }
 
             MessageBox.Show($"Противник \"{name}\" отредактирован.");
         }
@@ -152,7 +170,7 @@ namespace Lab_1
                 MessageBox.Show("Сначала добавьте или выберите противника для удаления.");
                 return;
             }
-
+            EnemiesListBox.Items.Remove(currentEnemy.Name);
             enemyList.DeleteEnemyByName(currentEnemy.Name);
             currentEnemy = null;
 
@@ -197,7 +215,7 @@ namespace Lab_1
             }
 
         }
-        private void EnemiesListBox_SelectionChanged(object sender,SelectionChangedEventArgs e)
+        private void EnemiesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (EnemiesListBox.SelectedItem == null)
                 return;
@@ -217,6 +235,25 @@ namespace Lab_1
             Spawn_enemy.Text = currentEnemy.SpawnChance.ToString();
 
             selectedIconName = currentEnemy.IconName;
+
+            // Ищем иконку противника
+            foreach (object item in IconsListBox.Items)
+            {
+                if (item is Image image && image.Source != null)
+                {
+                    string imageName = System.IO.Path.GetFileName(
+                    image.Source.ToString()
+                    );
+
+                    if (imageName == currentEnemy.IconName)
+                    {
+                        IconsListBox.SelectedItem = image;
+                        IconsListBox.ScrollIntoView(image);
+                        break;
+                    }
+                }
+            }
         }
+
     }
 }
