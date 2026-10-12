@@ -25,6 +25,10 @@ namespace Lab_1
                     case "CNormalEnemyTemplate":
                         return
                         JsonSerializer.Deserialize<CNormalEnemyTemplate>(jsonDoc.RootElement.GetRawText(), options);
+
+                    case "CGoldGoblinNormalEnemyTemplate":
+                        return
+                        JsonSerializer.Deserialize<CGoldGoblinNormalEnemyTemplate>(jsonDoc.RootElement.GetRawText(), options);
                     default:
                         throw new NotSupportedException($"Unknown type: {type}");
                 }
