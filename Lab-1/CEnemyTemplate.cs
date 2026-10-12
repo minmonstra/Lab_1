@@ -23,7 +23,8 @@ namespace Lab_1
         public double GoldModifier { get; set; }
         [JsonInclude]
         public double SpawnChance { get; set; }
-        
+ 
+
 
         //Конструктор класса
         public CEnemyTemplate(string name, string iconName, int baseLife,
