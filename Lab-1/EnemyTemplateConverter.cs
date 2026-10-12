@@ -16,18 +16,15 @@ namespace Lab_1
             var jsonDoc = JsonDocument.ParseValue(ref reader);
             try
             {
-                string type =
-                jsonDoc.RootElement.GetProperty("$type").GetString();
+                string type = jsonDoc.RootElement.GetProperty("$type").GetString();
                 switch (type)
                 {
                     case "CArmoredEnemyTemplate":
                         return
-                        JsonSerializer.Deserialize<CArmoredEnemyTemplate>(jsonDoc.RootElement.GetRawT
-                        ext(), options);
+                        JsonSerializer.Deserialize<CArmoredEnemyTemplate>(jsonDoc.RootElement.GetRawText(), options);
                     case "CNormalEnemyTemplate":
                         return
-                        JsonSerializer.Deserialize<CNormalEnemyTemplate>(jsonDoc.RootElement.GetRawTe
-                        xt(), options);
+                        JsonSerializer.Deserialize<CNormalEnemyTemplate>(jsonDoc.RootElement.GetRawText(), options);
                     default:
                         throw new NotSupportedException($"Unknown type: {type}");
                 }
@@ -58,3 +55,4 @@ namespace Lab_1
             }
         }
     }
+}
