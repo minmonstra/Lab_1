@@ -8,15 +8,15 @@ namespace Lab_1
 {
     public class CEnemyTemplateList
     {
+        private readonly ISaveList<List<CEnemyTemplate>> _serializer = new JsonEnemySaver();
         //Список противников из класса CEnemyTemplate
         List<CEnemyTemplate> enemies;
         public CEnemyTemplateList()
         {
             enemies = new List<CEnemyTemplate>(); }
-        
-            public void AddEnemy(string name, string iconName, int baseLife, double lifeModifier, int baseGold, double goldModifier, double spawnChance)
+
+        public void AddEnemy(CEnemyTemplate enemy)
         {
-            CEnemyTemplate enemy = new CEnemyTemplate(name, iconName, baseLife, lifeModifier, baseGold, goldModifier, spawnChance);
             enemies.Add(enemy);
         }
         public void DeleteEnemyByName(string name)
@@ -84,33 +84,12 @@ namespace Lab_1
 
         public void SaveToJson(string path)
         {
-            string json = JsonSerializer.Serialize(enemies);
-            File.WriteAllText(path, json);
+            _serializer.Save(enemies, path);
         }
 
         public void LoadFromJson(string path)
         {
-            if (File.Exists(path))
-            {
-                enemies.Clear();
-                string json = File.ReadAllText(path);
-                JsonDocument document = JsonDocument.Parse(json);
-                foreach (JsonElement enemyElement in document.RootElement.EnumerateArray())
-                {
-                    string name=enemyElement.GetProperty("Name").GetString();
-                    string iconName = enemyElement.GetProperty("IconName").GetString();
-                    int baseLife = enemyElement.GetProperty("BaseLife").GetInt32();
-                    double lifeModifier = enemyElement.GetProperty("LifeModifier").GetDouble();
-                    int baseGold = enemyElement.GetProperty("BaseGold").GetInt32();
-                    double goldModifier = enemyElement.GetProperty("GoldModifier").GetDouble();
-                    double spawnChance = enemyElement.GetProperty("SpawnChance").GetDouble();
-                    AddEnemy(name,iconName,baseLife,lifeModifier,baseGold,goldModifier,spawnChance);
-
-                }
-                 
-            }
-
-
+            _serializer.Load(path);
         }
     }
 }
