@@ -19,16 +19,16 @@ namespace Lab_1
                 string type = jsonDoc.RootElement.GetProperty("$type").GetString();
                 switch (type)
                 {
-                    case "CArmoredEnemyTemplate":
+                    case nameof(CArmoredEnemyTemplate):
                         return
                         JsonSerializer.Deserialize<CArmoredEnemyTemplate>(jsonDoc.RootElement.GetRawText(), options);
-                    case "CNormalEnemyTemplate":
+                    case nameof(CNormalEnemyTemplate):
                         return
                         JsonSerializer.Deserialize<CNormalEnemyTemplate>(jsonDoc.RootElement.GetRawText(), options);
 
-                    case "CGoldGoblinNormalEnemyTemplate":
+                    case nameof(CGoldGoblinEnemyTemplate):
                         return
-                        JsonSerializer.Deserialize<CGoldGoblinNormalEnemyTemplate>(jsonDoc.RootElement.GetRawText(), options);
+                        JsonSerializer.Deserialize<CGoldGoblinEnemyTemplate>(jsonDoc.RootElement.GetRawText(), options);
                     default:
                         throw new NotSupportedException($"Unknown type: {type}");
                 }

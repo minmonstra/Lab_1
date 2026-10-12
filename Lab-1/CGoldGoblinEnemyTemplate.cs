@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace Lab_1
 {
-    public class CGoldGoblinNormalEnemyTemplate : CEnemyTemplate
+    public class CGoldGoblinEnemyTemplate : CEnemyTemplate
     {
-        public int LifeTime
+        public int lifeTime
         {
-            get { return TimeValue; }
-            set { TimeValue = value > 0 ? value : 25; }
+            get { return lifeTimeValue; }
+            set { lifeTimeValue = value > 0 ? value : 25; }
         }
-        int TimeValue;
-        public CGoldGoblinNormalEnemyTemplate(string name, string iconName, int baseLife,
+        int lifeTimeValue;
+        public CGoldGoblinEnemyTemplate(string name, string iconName, int baseLife,
             double lifeModifier, int baseGold,
             double goldModifier, double spawnChance, int time)
             : base(name, iconName, baseLife, lifeModifier, baseGold, goldModifier, spawnChance)
         {
-            LifeTime = time;  
+            lifeTime = time;  
 
 
         }
