@@ -7,23 +7,53 @@ namespace Lab_1
 {
     public abstract class CEnemyTemplate
     {
-        //Свойства класса — доступны для чтения снаружи,
-        //изменяются только изнутри класса (через конструктор)
-        [JsonInclude]
-        public string Name { get; set; }
-        [JsonInclude]
-        public string IconName { get; set; }
-        [JsonInclude]
-        public int BaseLife { get; set; }
-        [JsonInclude]
-        public double LifeModifier { get; set; }
-        [JsonInclude]
-        public int BaseGold { get; set; }
-        [JsonInclude]
-        public double GoldModifier { get; set; }
-        [JsonInclude]
-        public double SpawnChance { get; set; }
- 
+        string name;
+        public string Name
+        {
+            get { return name; }
+            set { if (value.Length > 0) name = value; else name = "unknown"; }
+        }
+
+        string iconname;
+        public string IconName
+        {
+            get { return name; }
+            set { if (value.Length > 0) name = value; else name = "unknown"; }
+        }
+
+        int baselife;
+
+        public int BaseLife
+        {
+            get { return baselife; }
+            set { if (value > 0) baselife = value; else baselife = 25; }
+        }
+
+        double lifeModifier;
+        public double LifeModifier
+        {
+            get { return lifeModifier; }
+            set { if (value > 0) lifeModifier = value; else lifeModifier = 25; }
+        }
+        int baseGold;
+        public int BaseGold
+        {
+            get { return baseGold; }
+            set { if (value > 0) baseGold = value; else baseGold = 25; }
+        }
+        double goldModifier;
+        public double GoldModifier
+        {
+            get { return goldModifier; }
+            set { if (value > 0) goldModifier = value; else goldModifier = 25; }
+        }
+        double spawnChance;
+        public double SpawnChance
+        {
+            get { return spawnChance; }
+            set { if (value > 0) spawnChance = value; else spawnChance = 25; }
+        }
+
 
 
         //Конструктор класса
