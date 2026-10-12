@@ -5,24 +5,24 @@ using System.IO;
 using System.Text.Json.Serialization;
 namespace Lab_1
 {
-    public class CEnemyTemplate
+    public abstract class CEnemyTemplate
     {
         //Свойства класса — доступны для чтения снаружи,
         //изменяются только изнутри класса (через конструктор)
         [JsonInclude]
-        public string Name { get; private set; }
+        public string Name { get; set; }
         [JsonInclude]
-        public string IconName { get; private set; }
+        public string IconName { get; set; }
         [JsonInclude]
-        public int BaseLife { get; private set; }
+        public int BaseLife { get; set; }
         [JsonInclude]
-        public double LifeModifier { get; private set; }
+        public double LifeModifier { get; set; }
         [JsonInclude]
-        public int BaseGold { get; private set; }
+        public int BaseGold { get; set; }
         [JsonInclude]
-        public double GoldModifier { get; private set; }
+        public double GoldModifier { get; set; }
         [JsonInclude]
-        public double SpawnChance { get; private set; }
+        public double SpawnChance { get; set; }
         
 
         //Конструктор класса

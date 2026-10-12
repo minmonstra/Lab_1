@@ -101,17 +101,40 @@ namespace Lab_1
             }
         }
 
+        private bool TryParseDoubleFlexible(string text, out double result)
+        {
+            // Попробовать локаль пользователя
+            if (double.TryParse(text, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.CurrentCulture, out result))
+                return true;
+            // Попробовать invariant (точка как разделитель)
+            if (double.TryParse(text, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out result))
+                return true;
+            // Попробовать заменить запятую на точку и наоборот
+            string t = text?.Replace(',', '.') ?? string.Empty;
+            if (double.TryParse(t, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out result))
+                return true;
+            t = text?.Replace('.', ',') ?? string.Empty;
+            if (double.TryParse(t, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.CurrentCulture, out result))
+                return true;
+            result = 0;
+            return false;
+        }
+
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             string name = Name_enemy.Text;
             string iconName = selectedIconName;
 
-            if (!int.TryParse(Health_enemy.Text, out int baseLife) || !double.TryParse(Health_mod_enemy.Text, out double lifeModifier) || !int.TryParse(Gold_enemy.Text, out int baseGold) ||
-            !double.TryParse(Gold_mod_enemy.Text, out double goldModifier) || !double.TryParse(Spawn_enemy.Text, out double spawnChance))
+            if (!int.TryParse(Health_enemy.Text, out int baseLife) ||
+                !TryParseDoubleFlexible(Health_mod_enemy.Text, out double lifeModifier) ||
+                !int.TryParse(Gold_enemy.Text, out int baseGold) ||
+                !TryParseDoubleFlexible(Gold_mod_enemy.Text, out double goldModifier) ||
+                !TryParseDoubleFlexible(Spawn_enemy.Text, out double spawnChance))
             {
                 MessageBox.Show("Некорректные данные. Проверьте введённые значения.");
                 return;
             }
+
             enemyList.AddEnemy(name, iconName, baseLife, lifeModifier, baseGold, goldModifier, spawnChance);
 
             currentEnemy = enemyList.GetEnemyByName(name);
@@ -128,8 +151,11 @@ namespace Lab_1
                 return;
             }
 
-            if (!int.TryParse(Health_enemy.Text, out int baseLife) || !double.TryParse(Health_mod_enemy.Text, out double lifeModifier) || !int.TryParse(Gold_enemy.Text, out int baseGold) ||
-            !double.TryParse(Gold_mod_enemy.Text, out double goldModifier) || !double.TryParse(Spawn_enemy.Text, out double spawnChance))
+            if (!int.TryParse(Health_enemy.Text, out int baseLife) ||
+                !TryParseDoubleFlexible(Health_mod_enemy.Text, out double lifeModifier) ||
+                !int.TryParse(Gold_enemy.Text, out int baseGold) ||
+                !TryParseDoubleFlexible(Gold_mod_enemy.Text, out double goldModifier) ||
+                !TryParseDoubleFlexible(Spawn_enemy.Text, out double spawnChance))
             {
                 MessageBox.Show("Некорректные данные. Проверьте введённые значения.");
                 return;
