@@ -135,7 +135,7 @@ namespace Lab_1
                 return;
             }
 
-            enemyList.AddEnemy(name, iconName, baseLife, lifeModifier, baseGold, goldModifier, spawnChance);
+            enemyList.AddEnemy(currentEnemy); 
 
             currentEnemy = enemyList.GetEnemyByName(name);
             EnemiesListBox.Items.Add(name);
@@ -171,7 +171,7 @@ namespace Lab_1
 
             // удаляем и добавляем новую(так как свойства приватные)
             enemyList.DeleteEnemyByName(oldName);
-            enemyList.AddEnemy(name, iconName, baseLife, lifeModifier, baseGold, goldModifier, spawnChance);
+            enemyList.AddEnemy(currentEnemy);
             currentEnemy = enemyList.GetEnemyByName(name);
 
             if (selectedIndex >= 0 && selectedIndex < EnemiesListBox.Items.Count)

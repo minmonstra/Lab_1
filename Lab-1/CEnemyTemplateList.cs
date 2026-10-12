@@ -89,7 +89,7 @@ namespace Lab_1
 
         public void LoadFromJson(string path)
         {
-            _serializer.Load(path);
+            enemies  = _serializer.Load(path);
         }
     }
 }
