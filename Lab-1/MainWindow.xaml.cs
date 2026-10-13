@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace Lab_1
 {
@@ -120,21 +122,64 @@ namespace Lab_1
             return false;
         }
 
-        private void Add_Click(object sender, RoutedEventArgs e)
+        private CEnemyTemplate CreateTemplateFromForm() 
         {
             string name = Name_enemy.Text;
             string iconName = selectedIconName;
 
-            if (!int.TryParse(Health_enemy.Text, out int baseLife) ||
-                !TryParseDoubleFlexible(Health_mod_enemy.Text, out double lifeModifier) ||
-                !int.TryParse(Gold_enemy.Text, out int baseGold) ||
-                !TryParseDoubleFlexible(Gold_mod_enemy.Text, out double goldModifier) ||
-                !TryParseDoubleFlexible(Spawn_enemy.Text, out double spawnChance))
-            {
-                MessageBox.Show("Некорректные данные. Проверьте введённые значения.");
-                return;
+            if (TypeEnemies.SelectedIndex == -1){ 
+                MessageBox.Show("Выберите тип противника.");
+                return null;
             }
 
+            if (!int.TryParse(Health_enemy.Text, out int baseLife) ||
+                   !TryParseDoubleFlexible(Health_mod_enemy.Text, out double lifeModifier) ||
+                   !int.TryParse(Gold_enemy.Text, out int baseGold) ||
+                   !TryParseDoubleFlexible(Gold_mod_enemy.Text, out double goldModifier) ||
+                   !TryParseDoubleFlexible(Spawn_enemy.Text, out double spawnChance))
+            {
+                MessageBox.Show("Некорректные данные. Проверьте введённые значения.");
+                return null;
+            }
+
+
+            switch (TypeEnemies.SelectedIndex)
+            {
+                case 0:
+                    {
+                        return new CNormalEnemyTemplate(name, selectedIconName, baseLife, lifeModifier,
+                                                        baseGold, goldModifier, spawnChance);
+                    }
+                    
+               case 1:
+                    {
+                        if (!TryParseDoubleFlexible(Special_enemy.Text, out double armor))
+                        {
+                            MessageBox.Show("Некорректное значение брони.");
+                            return null;
+                        }
+                        return new CArmoredEnemyTemplate(name, selectedIconName, baseLife, lifeModifier,
+                                                         baseGold, goldModifier, spawnChance, armor);
+                    }
+                case 2:
+                    {
+                        if (!TryParseDoubleFlexible(Special_enemy.Text, out double lifetime))
+                        {
+                            MessageBox.Show("Некорректное значение времени жизни.");
+                            return null;
+                        }
+                        return new CGoldGoblinEnemyTemplate(name, selectedIconName, baseLife, lifeModifier,
+                                                         baseGold, goldModifier, spawnChance, lifetime);
+                    }
+                default:
+                    return null;
+            }
+        }
+
+   
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+          
             enemyList.AddEnemy(currentEnemy); 
 
             currentEnemy = enemyList.GetEnemyByName(name);
