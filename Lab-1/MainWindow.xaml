@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab_1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="750" Width="850">
+        Title="MainWindow" Height="780" Width="880">
     <Window.Resources>
         <Style x:Key="EnemyComboBox" TargetType="ComboBox">
             <Setter Property="Background" Value="#9B5E5F"/>
@@ -95,7 +95,7 @@
         <ListBox
 Width="auto"
 Height="auto"
-Margin="81,2,61,40"
+Margin="81,2,61,51"
 x:Name="IconsListBox"
 SelectionChanged="IconsListBox_SelectionChanged" Grid.Column="0" Grid.RowSpan="5" Grid.Row="3" Background="Black" BorderBrush="Transparent"/>
         <TextBlock Text="Имя" FontSize="30"   Margin="10,10,30,10" Grid.Row="1" Grid.Column="1" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
@@ -112,7 +112,7 @@ SelectionChanged="IconsListBox_SelectionChanged" Grid.Column="0" Grid.RowSpan="5
         <TextBox x:Name="Spawn_enemy" Margin="10,30,30,10" Grid.Row="6" Grid.Column="1" Background="Transparent" BorderBrush="Black" FontSize="25" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
 
         <TextBlock Text="Особенности" FontSize="25" Foreground ="#9B5E5F"  Margin="10,0,30,27" Grid.Row="7" Grid.Column="1" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
-        <TextBox x:Name="Special_enemy" Margin="10,30,30,10" Grid.Row="7" Grid.Column="1" Background="Transparent" BorderBrush="#9B5E5F" FontSize="25" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
+        <TextBox x:Name="Special_enemy" Margin="10,30,30,10" Grid.Row="7" Foreground ="#9B5E5F" Grid.Column="1" Background="Transparent" BorderBrush="#9B5E5F" FontSize="25" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
 
 
         <Button x:Name="Edit" Content="Редактировать" Click="Edit_Click"  Grid.Row="8" Grid.Column="1"  Background="#9B5E5F" FontSize="20" BorderBrush="Black" FontFamily="pack://application:,,,/Font/#bigdonstarve" Margin="11,25,9,25"  />
@@ -120,13 +120,13 @@ SelectionChanged="IconsListBox_SelectionChanged" Grid.Column="0" Grid.RowSpan="5
         <Button x:Name="Delete" Content="Удалить" Click="Delete_Click"  Grid.Row="8" Grid.Column="1"   Background="#9B5E5F"  FontSize="20" BorderBrush="Black"  FontFamily="pack://application:,,,/Font/#bigdonstarve" Margin="11,47,9,2"    />
 
         <ComboBox x:Name="TypeEnemies" Style="{StaticResource EnemyComboBox}"
-          Grid.Row="8" Grid.Column="0" Margin="442,10,0,10"> 
+          Grid.Row="8" Grid.Column="0" Margin="456,6,0,29"> 
             <ComboBoxItem>Обычный противник</ComboBoxItem>
             <ComboBoxItem>Бронированный противник</ComboBoxItem>
             <ComboBoxItem>Алчный гоблин</ComboBoxItem>
         </ComboBox>
 
-        <Button x:Name="Load" Content="Загрузить противника" Click="Load_Click"  Grid.Row="8" Grid.Column="0" Margin="28,6,493,27" Background="#9B5E5F" FontSize="23" BorderBrush="Black"  FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
+        <Button x:Name="Load" Content="Загрузить противника" Click="Load_Click"  Grid.Row="8" Grid.Column="0" Margin="28,6,493,29" Background="#9B5E5F" FontSize="23" BorderBrush="Black"  FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
         <Button x:Name="Save" Content="Сохранить" Click="Save_Click"  Grid.Row="8" Grid.Column="0" Margin="241,6,268,29" Background="#9B5E5F" FontSize="30" BorderBrush="Black" FontFamily="pack://application:,,,/Font/#bigdonstarve" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>

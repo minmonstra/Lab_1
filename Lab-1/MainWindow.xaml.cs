@@ -56,6 +56,7 @@ namespace Lab_1
         }
         public void DisplayIcons()
         {
+            IconsListBox.Items.Clear();
             foreach (EnemyIcon icon in enemyIcons)
             {
                 Image image = new Image()
@@ -223,7 +224,6 @@ namespace Lab_1
             currentEnemy = newTemplate;
             MessageBox.Show($"Противник \"{newTemplate.Name}\" изменён.");
         }
-}
         // удаление текущего выбранного противника из списка
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
@@ -299,7 +299,7 @@ namespace Lab_1
             Spawn_enemy.Text = currentEnemy.SpawnChance.ToString();
 
             selectedIconName = currentEnemy.IconName;
-
+            IconsListBox.SelectedItem = null;
             // Ищем иконку противника
             foreach (object item in IconsListBox.Items)
             {
