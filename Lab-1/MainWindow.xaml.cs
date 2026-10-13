@@ -125,7 +125,18 @@ namespace Lab_1
         private CEnemyTemplate CreateTemplateFromForm() 
         {
             string name = Name_enemy.Text;
+            if (name == null || name.Trim() == "")
+            {
+                MessageBox.Show("Введите имя противника.");
+                return null;
+            }
+            
             string iconName = selectedIconName;
+            if (string.IsNullOrEmpty(iconName))
+            {
+                MessageBox.Show("Выберите иконку для противника.");
+                return null;
+            }
 
             if (TypeEnemies.SelectedIndex == -1){ 
                 MessageBox.Show("Выберите тип противника.");
@@ -163,7 +174,7 @@ namespace Lab_1
                     }
                 case 2:
                     {
-                        if (!TryParseDoubleFlexible(Special_enemy.Text, out double lifetime))
+                        if (!int.TryParse(Special_enemy.Text, out int lifetime))
                         {
                             MessageBox.Show("Некорректное значение времени жизни.");
                             return null;
@@ -176,63 +187,43 @@ namespace Lab_1
             }
         }
 
-   
+
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-          
-            enemyList.AddEnemy(currentEnemy); 
+            CEnemyTemplate newTemplate = CreateTemplateFromForm();
+            if (newTemplate == null)
+                return; // сообщение об ошибке уже показано внутри метода
 
-            currentEnemy = enemyList.GetEnemyByName(name);
-            EnemiesListBox.Items.Add(name);
+            enemyList.AddEnemy(newTemplate);
+            currentEnemy = newTemplate;
+            EnemiesListBox.Items.Add(newTemplate.Name);
 
-            MessageBox.Show($"Противник \"{name}\" добавлен.");
+            MessageBox.Show($"Противник \"{newTemplate.Name}\" добавлен.");
         }
-
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
             if (currentEnemy == null)
             {
-                MessageBox.Show("Сначала добавьте или выберите противника для редактирования.");
+                MessageBox.Show("Выберите противника для редактирования.");
                 return;
             }
 
-            if (!int.TryParse(Health_enemy.Text, out int baseLife) ||
-                !TryParseDoubleFlexible(Health_mod_enemy.Text, out double lifeModifier) ||
-                !int.TryParse(Gold_enemy.Text, out int baseGold) ||
-                !TryParseDoubleFlexible(Gold_mod_enemy.Text, out double goldModifier) ||
-                !TryParseDoubleFlexible(Spawn_enemy.Text, out double spawnChance))
-            {
-                MessageBox.Show("Некорректные данные. Проверьте введённые значения.");
+            CEnemyTemplate newTemplate = CreateTemplateFromForm();
+            if (newTemplate == null)
                 return;
-            }
 
-            string name = Name_enemy.Text;
-            string iconName = selectedIconName;
+            enemyList.DeleteEnemyByName(currentEnemy.Name);
+            enemyList.AddEnemy(newTemplate);
+            currentEnemy = newTemplate;
 
-            // Сохраняем текущий выбранный индекс и старое имя, чтобы заменить запись в ListBox,
-            // а не просто добавить новую — это предотвращает дубликаты
-            int selectedIndex = EnemiesListBox.SelectedIndex;
-            string oldName = currentEnemy.Name;
+            EnemiesListBox.Items.Clear();
+            foreach (string n in enemyList.GetListOfEnemyNames())
+                EnemiesListBox.Items.Add(n);
 
-            // удаляем и добавляем новую(так как свойства приватные)
-            enemyList.DeleteEnemyByName(oldName);
-            enemyList.AddEnemy(currentEnemy);
-            currentEnemy = enemyList.GetEnemyByName(name);
-
-            if (selectedIndex >= 0 && selectedIndex < EnemiesListBox.Items.Count)
-            {
-                EnemiesListBox.Items[selectedIndex] = name;
-            }
-            else
-            {
-                // запасной вариант: если индекс недоступен — удалить старое и добавить новое (чтобы не дублировать)
-                if (EnemiesListBox.Items.Contains(oldName))
-                    EnemiesListBox.Items.Remove(oldName);
-                EnemiesListBox.Items.Add(name);
-            }
-
-            MessageBox.Show($"Противник \"{name}\" отредактирован.");
+            currentEnemy = newTemplate;
+            MessageBox.Show($"Противник \"{newTemplate.Name}\" изменён.");
         }
+}
         // удаление текущего выбранного противника из списка
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
@@ -298,6 +289,8 @@ namespace Lab_1
             if (currentEnemy == null)
                 return;
 
+
+
             Name_enemy.Text = currentEnemy.Name;
             Health_enemy.Text = currentEnemy.BaseLife.ToString();
             Health_mod_enemy.Text = currentEnemy.LifeModifier.ToString();
@@ -323,6 +316,23 @@ namespace Lab_1
                         break;
                     }
                 }
+            }
+            switch (currentEnemy)
+            {
+                case CArmoredEnemyTemplate armorValue:
+                    TypeEnemies.SelectedIndex = 1;
+                    Special_enemy.Text = armorValue.Armor.ToString();
+                    break;
+
+                case CGoldGoblinEnemyTemplate lifeTimeValue:
+                    TypeEnemies.SelectedIndex = 2;
+                    Special_enemy.Text = lifeTimeValue.LifeTime.ToString();
+                    break;
+
+                case CNormalEnemyTemplate:
+                    TypeEnemies.SelectedIndex = 0;
+                    Special_enemy.Text = "";
+                    break;
             }
         }
 

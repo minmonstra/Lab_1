@@ -110,12 +110,17 @@ SelectionChanged="IconsListBox_SelectionChanged" Grid.Column="0" Grid.RowSpan="5
         <TextBox x:Name="Gold_mod_enemy" Margin="10,40,30,71" Grid.Row="5" Grid.Column="1" Background="Transparent" BorderBrush="Black" FontSize="25" FontFamily="pack://application:,,,/Font/#bigdonstarve" Grid.RowSpan="2"/>
         <TextBlock Text="Спавн" FontSize="25"   Margin="10,0,30,27" Grid.Row="6" Grid.Column="1" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
         <TextBox x:Name="Spawn_enemy" Margin="10,30,30,10" Grid.Row="6" Grid.Column="1" Background="Transparent" BorderBrush="Black" FontSize="25" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
-        <Button x:Name="Edit" Content="Редактировать" Click="Edit_Click"  Grid.Row="6" Grid.Column="1" Margin="10,71,30,44" Background="#9B5E5F" FontSize="20" BorderBrush="Black" FontFamily="pack://application:,,,/Font/#bigdonstarve" Grid.RowSpan="2"/>
-        <Button x:Name="Add" Content="Добавить" Click="Add_Click"  Grid.Row="7" Grid.Column="1" Margin="10,25,30,16" Background="#9B5E5F" FontSize="20" BorderBrush="Black" FontFamily="pack://application:,,,/Font/#bigdonstarve" />
 
-        <Button x:Name="Delete" Content="Удалить" Click="Delete_Click"  Grid.Row="7" Grid.Column="1" Margin="10,52,30,63" Background="#9B5E5F"  FontSize="20" BorderBrush="Black"  FontFamily="pack://application:,,,/Font/#bigdonstarve" Grid.RowSpan="2"/>
+        <TextBlock Text="Особенности" FontSize="25" Foreground ="#9B5E5F"  Margin="10,0,30,27" Grid.Row="7" Grid.Column="1" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
+        <TextBox x:Name="Special_enemy" Margin="10,30,30,10" Grid.Row="7" Grid.Column="1" Background="Transparent" BorderBrush="#9B5E5F" FontSize="25" FontFamily="pack://application:,,,/Font/#bigdonstarve"/>
+
+
+        <Button x:Name="Edit" Content="Редактировать" Click="Edit_Click"  Grid.Row="8" Grid.Column="1"  Background="#9B5E5F" FontSize="20" BorderBrush="Black" FontFamily="pack://application:,,,/Font/#bigdonstarve" Margin="11,25,9,25"  />
+        <Button x:Name="Add" Content="Добавить" Click="Add_Click"  Grid.Row="7" Grid.Column="1"   Background="#9B5E5F" FontSize="20" BorderBrush="Black" FontFamily="pack://application:,,,/Font/#bigdonstarve" Margin="11,72,9,47" Grid.RowSpan="2"/>
+        <Button x:Name="Delete" Content="Удалить" Click="Delete_Click"  Grid.Row="8" Grid.Column="1"   Background="#9B5E5F"  FontSize="20" BorderBrush="Black"  FontFamily="pack://application:,,,/Font/#bigdonstarve" Margin="11,47,9,2"    />
+
         <ComboBox x:Name="TypeEnemies" Style="{StaticResource EnemyComboBox}"
-          Grid.Row="8" Grid.Column="0" Margin="442,10,0,10">
+          Grid.Row="8" Grid.Column="0" Margin="442,10,0,10"> 
             <ComboBoxItem>Обычный противник</ComboBoxItem>
             <ComboBoxItem>Бронированный противник</ComboBoxItem>
             <ComboBoxItem>Алчный гоблин</ComboBoxItem>
